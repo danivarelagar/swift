@@ -8,6 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController(rootViewController: ProductListViewController())
         window?.rootViewController = navigationController
+        window?.backgroundColor = Colors.backgroundColor // Color de fondo personalizado
         window?.makeKeyAndVisible()
         return true
     }

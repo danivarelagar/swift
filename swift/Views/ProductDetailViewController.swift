@@ -18,8 +18,9 @@ class ProductDetailViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = Colors.backgroundColor // Color de fondo personalizado
         title = product.title
+        navigationController?.navigationBar.tintColor = Colors.primaryColor // Color de la barra de navegación
         
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,18 +31,21 @@ class ProductDetailViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = product.title
         titleLabel.font = .boldSystemFont(ofSize: 24)
+        titleLabel.textColor = Colors.textColor // Color del texto
         view.addSubview(titleLabel)
         
         let descriptionLabel = UILabel()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = product.description
         descriptionLabel.numberOfLines = 0
+        descriptionLabel.textColor = Colors.textColor // Color del texto
         view.addSubview(descriptionLabel)
         
         let priceLabel = UILabel()
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.text = "$\(product.price)"
         priceLabel.font = .boldSystemFont(ofSize: 20)
+        priceLabel.textColor = Colors.secondaryColor // Color del texto
         view.addSubview(priceLabel)
         
         NSLayoutConstraint.activate([

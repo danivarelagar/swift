@@ -22,6 +22,10 @@ class ProductListViewController: UIViewController {
     
     private func setupUI() {
         title = "Electrónica"
+        view.backgroundColor = Colors.backgroundColor // Color de fondo personalizado
+        navigationController?.navigationBar.barTintColor = Colors.primaryColor // Color de la barra de navegación
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: Colors.textColor] // Color del texto de la barra de navegación
+        
         view.addSubview(logoImageView)
         view.addSubview(tableView)
         
@@ -75,6 +79,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let product = viewModel.products[indexPath.row]
         cell.textLabel?.text = product.title
+        cell.textLabel?.textColor = Colors.textColor // Color del texto de las celdas
         return cell
     }
     
