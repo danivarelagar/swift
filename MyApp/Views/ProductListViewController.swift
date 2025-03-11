@@ -6,6 +6,12 @@ class ProductListViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     private let tableView = UITableView()
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "logo"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,14 +22,21 @@ class ProductListViewController: UIViewController {
     
     private func setupUI() {
         title = "Electrónica"
+        view.addSubview(logoImageView)
         view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.heightAnchor.constraint(equalToConstant: 100),
+            logoImageView.widthAnchor.constraint(equalToConstant: 100),
+            
+            tableView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 10),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
@@ -40,14 +53,14 @@ class ProductListViewController: UIViewController {
         viewModel.$isLoading
             .receive(on: DispatchQueue.main)
             .sink { isLoading in
-                
+                // Para cuando está cargando
             }
             .store(in: &cancellables)
         
         viewModel.$errorMessage
             .receive(on: DispatchQueue.main)
             .sink { errorMessage in
-                
+                // Cuando hay un error
             }
             .store(in: &cancellables)
     }
